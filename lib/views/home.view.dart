@@ -40,7 +40,7 @@ class _HomeViewState extends State<HomeView> {
               child: CheckboxListTile(
                 title: Text(
                   todo.title,
-                  style: TextStyle(color: Colors.white, fontSize: 15),
+                  style: TextStyle(color: Colors.white, fontSize: 17),
                 ),
                 controlAffinity: ListTileControlAffinity.platform,
                 value: todo.done,
@@ -64,9 +64,6 @@ class _HomeViewState extends State<HomeView> {
         backgroundColor: Color.fromRGBO(46, 167, 223, 1.0),
         centerTitle: false,
         title: Text('Lista de Tarefas'),
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.add), onPressed: () {}),
-        ],
       ),
       drawer: Drawer(
         child: ListView(
@@ -97,18 +94,20 @@ class _HomeViewState extends State<HomeView> {
               padding: EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
               child: InkWell(
                 onTap: () {
-                  Navigator.pushReplacementNamed(context, 'signupView');
+                  Navigator.pushReplacementNamed(context, 'loginView');
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Row(
                       children: <Widget>[
-                        Icon(Icons.person_add),
                         Padding(
-                          padding: EdgeInsets.all(20.0),
+                          padding: EdgeInsets.only(left: 10),
+                          child: Icon(Icons.settings_power)),
+                        Padding(
+                          padding: EdgeInsets.all(10.0),
                           child: Text(
-                            "Cadastrar",
+                            "Sair",
                             style: TextStyle(fontSize: 16.0),
                           ),
                         ),

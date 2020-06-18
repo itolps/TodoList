@@ -167,7 +167,7 @@ class _SignupViewState extends State<SignupView> {
                               setSelectedRadio(val);
                             },
                           ),
-                          RadioListTile(
+                          RadioListTile(                          
                             value: 2,
                             groupValue: selectedRadio,
                             title: Text("Feminino"),

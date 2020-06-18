@@ -1,3 +1,4 @@
+import 'package:app_mobile/utilities/global.scaffold.dart';
 import 'package:app_mobile/views/home.view.dart';
 import 'package:app_mobile/views/login.view.dart';
 import 'package:app_mobile/views/signup.view.dart';
@@ -15,6 +16,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: LoginView(),
+      builder: (context,child){
+        return Scaffold(
+          key: GlobalScaffold.instance.scaffkey,
+          body: child,
+        );
+      },
       routes: {
         'loginView': (context) => LoginView(),
         'signupView': (context) => SignupView(),

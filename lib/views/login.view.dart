@@ -1,5 +1,5 @@
+import 'package:app_mobile/utilities/global.scaffold.dart';
 import 'package:app_mobile/utilities/utils.dart';
-import 'package:app_mobile/views/home.view.dart';
 import 'package:flutter/material.dart';
 
 class LoginView extends StatefulWidget {
@@ -9,6 +9,29 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   final _formKey = GlobalKey<FormState>();
+
+  void onClickSnackbar() {
+    final snackbar = SnackBar(
+      backgroundColor: Color.fromRGBO(46, 167, 223, 1.0),
+      duration: Duration(seconds: 3),
+      content: Row(
+        children: <Widget>[
+          Icon(Icons.thumb_up),
+          SizedBox(width: 20),
+          Expanded(
+            child: Text(
+              "Bem Vindo!",
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+    GlobalScaffold.instance.showSnackbar(snackbar);
+  }
 
   Widget _buildUsername() {
     return Container(
@@ -94,6 +117,7 @@ class _LoginViewState extends State<LoginView> {
         onPressed: () {
           if (_formKey.currentState.validate()) {
             Navigator.pushReplacementNamed(context, 'homeView');
+            onClickSnackbar();
           }
         },
         padding: EdgeInsets.all(15.0),
@@ -183,6 +207,10 @@ class _LoginViewState extends State<LoginView> {
                       SizedBox(
                         height: 20,
                       ),
+                      // RaisedButton(
+                      //   child: Text("login"),
+                      //   onPressed: onClickSnackbar,
+                      // ),
                       _buildLoginBtn(),
                       _buildSignupBtn(),
                     ],
