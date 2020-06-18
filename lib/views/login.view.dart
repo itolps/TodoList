@@ -138,11 +138,39 @@ class _LoginViewState extends State<LoginView> {
                     children: <Widget>[
                       SizedBox(
                         width: MediaQuery.of(context).size.width / 2,
-                        height: MediaQuery.of(context).size.height / 2.5,
+                        height: MediaQuery.of(context).size.height / 4,
                         child: Image.asset("images/logo.png"),
                       ),
                       SizedBox(
                         height: 5,
+                      ),
+                      Stack(
+                        children: <Widget>[
+                          // Borda do Texto.
+                          Text(
+                            'Todo List',
+                            style: TextStyle(
+                              fontSize: 25,
+                              fontStyle: FontStyle.italic,
+                              foreground: Paint()
+                                ..style = PaintingStyle.stroke
+                                ..strokeWidth = 6
+                                ..color = Color.fromRGBO(46, 167, 223, 1.0),
+                            ),
+                          ),
+                          // Texto.
+                          Text(
+                            'Todo List',
+                            style: TextStyle(
+                              fontSize: 25,
+                              fontStyle: FontStyle.italic,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 30,
                       ),
                       _buildUsername(),
                       SizedBox(
@@ -153,7 +181,7 @@ class _LoginViewState extends State<LoginView> {
                         height: 10,
                       ),
                       SizedBox(
-                        height: 15,
+                        height: 20,
                       ),
                       _buildLoginBtn(),
                       _buildSignupBtn(),
