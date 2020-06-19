@@ -52,14 +52,6 @@ class _SignupViewState extends State<SignupView> {
     });
   }
 
-  add() {
-    //setState(() {
-    //   listUsers.add(User(
-    //       name: nameController.text,
-    //       password: passwordController.text,
-    //       gender: genderController.text));
-    // });
-  }
 
   Widget _buildUsername() {
     return Container(

@@ -3,7 +3,6 @@ class User {
   final String password;
   final String gender;
 
-
   User({
     this.name,
     this.password,
