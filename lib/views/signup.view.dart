@@ -1,5 +1,9 @@
+import 'package:app_mobile/models/user.dart';
 import 'package:app_mobile/utilities/utils.dart';
 import 'package:flutter/material.dart';
+
+import '../user_list.dart';
+import 'home.view.dart';
 
 class SignupView extends StatefulWidget {
   @override
@@ -7,25 +11,42 @@ class SignupView extends StatefulWidget {
 }
 
 class _SignupViewState extends State<SignupView> {
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController genderController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
 
-  int selectedRadio;
+  //List<User> listUsers = usersList;
+
+  String selectedRadio;
 
   @override
   void initState() {
     super.initState();
-    selectedRadio = 0;
+    selectedRadio = "";
   }
 
-  setSelectedRadio(int val) {
+  setSelectedRadio(String val) {
     setState(() {
       selectedRadio = val;
+      genderController.text = this.selectedRadio;
     });
+  }
+
+  add() {
+    //setState(() {
+    //   listUsers.add(User(
+    //       name: nameController.text,
+    //       password: passwordController.text,
+    //       gender: genderController.text));
+    // });
   }
 
   Widget _buildUsername() {
     return Container(
       child: TextFormField(
+        controller: nameController,
         keyboardType: TextInputType.text,
         validator: Utils.validateName,
         decoration: InputDecoration(
@@ -48,6 +69,7 @@ class _SignupViewState extends State<SignupView> {
   Widget _buildPassword() {
     return Container(
       child: TextFormField(
+        controller: passwordController,
         keyboardType: TextInputType.text,
         obscureText: true,
         validator: Utils.validatePassword,
@@ -76,7 +98,16 @@ class _SignupViewState extends State<SignupView> {
         elevation: 10.0,
         onPressed: () {
           if (_formKey.currentState.validate()) {
-            Navigator.pushReplacementNamed(context, 'homeView');
+            User user = User(
+                name: nameController.text,
+                password: passwordController.text,
+                gender: genderController.text);
+            print(user.name);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomeView(user: user)),
+            );
+            //Navigator.pushReplacementNamed(context, 'homeView');
           }
         },
         padding: EdgeInsets.all(15.0),
@@ -159,7 +190,7 @@ class _SignupViewState extends State<SignupView> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           RadioListTile(
-                            value: 1,
+                            value: "M",
                             groupValue: selectedRadio,
                             title: Text("Masculino"),
                             onChanged: (val) {
@@ -167,8 +198,8 @@ class _SignupViewState extends State<SignupView> {
                               setSelectedRadio(val);
                             },
                           ),
-                          RadioListTile(                          
-                            value: 2,
+                          RadioListTile(
+                            value: "F",
                             groupValue: selectedRadio,
                             title: Text("Feminino"),
                             onChanged: (val) {
