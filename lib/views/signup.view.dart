@@ -1,8 +1,8 @@
 import 'package:app_mobile/models/user.dart';
+import 'package:app_mobile/utilities/global.scaffold.dart';
 import 'package:app_mobile/utilities/utils.dart';
 import 'package:flutter/material.dart';
 
-import '../user_list.dart';
 import 'home.view.dart';
 
 class SignupView extends StatefulWidget {
@@ -17,7 +17,25 @@ class _SignupViewState extends State<SignupView> {
 
   final _formKey = GlobalKey<FormState>();
 
-  //List<User> listUsers = usersList;
+  void onClickSnackbar() {
+    final snackbar = SnackBar(
+      backgroundColor: Color.fromRGBO(46, 167, 223, 1.0),
+      duration: Duration(seconds: 3),
+      content: Row(
+        children: <Widget>[
+          Icon(Icons.thumb_up),
+          SizedBox(width: 20),
+          Expanded(
+            child: Text(
+              "Bem Vindo!",
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+            ),
+          )
+        ],
+      ),
+    );
+    GlobalScaffold.instance.showSnackbar(snackbar);
+  }
 
   String selectedRadio;
 
@@ -107,7 +125,7 @@ class _SignupViewState extends State<SignupView> {
               context,
               MaterialPageRoute(builder: (context) => HomeView(user: user)),
             );
-            //Navigator.pushReplacementNamed(context, 'homeView');
+            onClickSnackbar();
           }
         },
         padding: EdgeInsets.all(15.0),
@@ -123,26 +141,6 @@ class _SignupViewState extends State<SignupView> {
             fontSize: 15.0,
             fontWeight: FontWeight.bold,
             fontFamily: 'OpenSans',
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildBackLoginBtn() {
-    return Container(
-      alignment: Alignment.center,
-      child: FlatButton(
-        onPressed: () {
-          Navigator.pushReplacementNamed(context, 'loginView');
-        },
-        padding: EdgeInsets.only(left: 5.0),
-        child: Text(
-          'Voltar para Login',
-          style: TextStyle(
-            color: Color.fromRGBO(46, 167, 223, 1.0),
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
           ),
         ),
       ),
@@ -216,7 +214,6 @@ class _SignupViewState extends State<SignupView> {
                       SizedBox(
                         height: 5,
                       ),
-                      _buildBackLoginBtn()
                     ],
                   ),
                 ),

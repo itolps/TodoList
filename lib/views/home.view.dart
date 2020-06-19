@@ -2,11 +2,8 @@ import 'package:app_mobile/models/todo.dart';
 import 'package:app_mobile/models/user.dart';
 import 'package:flutter/material.dart';
 
-import '../user_list.dart';
-
 class HomeView extends StatefulWidget {
   var todos = new List<Todo>();
-  List<User> listUsers = usersList;
 
   User user = User();
 
@@ -65,6 +62,8 @@ class _HomeViewState extends State<HomeView> {
         });
   }
 
+  bool isSwitched = false;
+
   @override
   Widget build(BuildContext context) {
     print("Nome: " + this.widget.user.name);
@@ -73,36 +72,33 @@ class _HomeViewState extends State<HomeView> {
         backgroundColor: Color.fromRGBO(46, 167, 223, 1.0),
         centerTitle: false,
         title: Text('Lista de Tarefas'),
+        actions: <Widget>[
+          Switch(
+            value: isSwitched,
+            onChanged: (value) {
+              setState(() {
+                isSwitched = value;
+                print(isSwitched);
+              });
+            },
+            activeTrackColor: Colors.lightGreenAccent,
+            activeColor: Colors.green,
+          ),
+        ],
       ),
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
             UserAccountsDrawerHeader(
+              accountEmail: null,
               accountName: Text(this.widget.user.name),
               currentAccountPicture: CircleAvatar(
                 radius: 30.0,
                 backgroundImage: NetworkImage(
-                    'https://lh3.googleusercontent.com/proxy/jcT6r7C5yKH-2Vk7VqSUbeH_0XVOLkMLJ5Tm9G1Bb7Z-lDvXA-ARiHM8vlNe8VwtDVDQ7zmz4OuTpKgn4tiS40IlQ6aDOrLf7Zg6Rl3k2KCtk-fhi75ZuqF8K_-5SUEOWKTlSUG03XDKTqf8sXfg16_CoCutDCVW_g0Rb41u'),
+                    'https://scontent.ffor36-1.fna.fbcdn.net/v/t1.0-9/p960x960/90086451_2971294566290223_5867931705892929536_o.jpg?_nc_cat=110&_nc_sid=85a577&_nc_oc=AQl_DVOMvdpOhkmkdTxhgt0H4Kz2V0N9pqf8frqyqzAwPFjVU_GmMU0pdmfhfFqtVk0&_nc_ht=scontent.ffor36-1.fna&_nc_tp=6&oh=c81880c200f07238c66d43e0579de0fb&oe=5F13E536'),
                 backgroundColor: Colors.transparent,
               ),
             ),
-            // child: Container(
-            //   child: Column(
-            //     children: <Widget>[
-            //       Material(
-            //         color: Colors.blue[200],
-            //         borderRadius: BorderRadius.all(Radius.circular(30.0)),
-            //         child: Padding(
-            //             padding: EdgeInsets.all(8.0),
-            //             child: Image.asset(
-            //               'images/logo.png',
-            //               width: MediaQuery.of(context).size.width,
-            //               height: 100,
-            //             )),
-            //       )
-            //     ],
-            //   ),
-            // ),
             Padding(
               padding: EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
               child: InkWell(
